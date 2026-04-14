@@ -7,7 +7,7 @@
   <link rel="icon" type="image/svg+xml" href="nush-favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Syne:wght@700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -52,11 +52,18 @@
       white-space: nowrap;
     }
     .nav-logo {
-      font-weight: 800;
-      font-size: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
       text-decoration: none;
     }
-    .nav-logo .white { color: #fff; }
+    .nav-logo img { height: 40px; width: auto; }
+    .nav-logo-text {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: #fff;
+    }
     .nav-logo .coral { color: var(--accent); }
     .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
     .nav-links a {
@@ -477,6 +484,7 @@
     <a href="/#work" class="back-link">← Back to Work</a>
     <a href="/" class="nav-logo">
       <img src="nush-logo.svg" alt="Nush" />
+      <span class="nav-logo-text">Nush.</span>
     </a>
     <ul class="nav-links">
       <li><a href="/">Home</a></li>
