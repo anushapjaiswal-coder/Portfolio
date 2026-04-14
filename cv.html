@@ -434,6 +434,32 @@
       color: var(--text-muted);
     }
 
+    /* ── GLOBAL MEDIA ────────────────────────────── */
+    img, video { max-width: 100%; height: auto; }
+
+    /* ── HAMBURGER ───────────────────────────────── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+      flex-shrink: 0;
+    }
+    .hamburger span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: #fff;
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
     /* ── ANIMATIONS ───────────────────────────────── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(24px); }
@@ -484,27 +510,50 @@
       .nav-links { gap: 20px; }
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       .navbar {
         top: 12px;
-        padding: 10px 16px;
-        gap: 16px;
+        left: 16px;
+        right: 16px;
+        transform: none;
+        width: auto;
+        border-radius: 16px;
+        padding: 12px 16px;
+        flex-wrap: wrap;
+        gap: 0;
+        justify-content: space-between;
+        white-space: normal;
       }
-      .nav-links { gap: 14px; }
-      .nav-links a { font-size: 0.78rem; }
-      .nav-logo { font-size: 1rem; }
-
-      .cv-hero { padding: 100px 5vw 60px; }
-
-      .cv-main { padding: 0 5vw; }
-
+      .hamburger { display: flex; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        padding-top: 12px;
+        border-top: 1px solid rgba(255,255,255,0.06);
+        margin-top: 12px;
+        gap: 0;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links li { width: 100%; }
+      .nav-links a {
+        display: block;
+        padding: 10px 4px;
+        font-size: 0.9rem;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+      }
+      .nav-links li:last-child a { border-bottom: none; }
+      .cv-hero { padding: 100px 16px 48px; flex-direction: column; align-items: flex-start; }
+      .cv-main { padding: 0 16px; }
+      .cv-col { padding: 40px 0; }
+      .cv-col-left { padding-right: 0; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 40px; }
+      .cv-col-right { padding-left: 0; padding-top: 40px; }
+      .cv-divider { margin: 0 16px; }
+      .cv-download-section { padding: 48px 16px; }
       .exp-header { flex-direction: column; gap: 2px; }
-
       .edu-item { flex-direction: column; gap: 4px; }
-
-      .cv-hero-right { flex-direction: column; }
-
-      footer { flex-direction: column; gap: 12px; text-align: center; }
+      .cv-hero-right { flex-direction: column; flex-wrap: wrap; }
+      footer { flex-direction: column; gap: 12px; text-align: center; padding: 28px 16px; }
     }
   </style>
 </head>
@@ -516,6 +565,9 @@
       <img src="nush-logo.svg" alt="Nush" />
       <span class="nav-logo-text">Nush.</span>
     </a>
+    <button class="hamburger" aria-label="Toggle menu" onclick="toggleMenu(this)">
+      <span></span><span></span><span></span>
+    </button>
     <ul class="nav-links">
       <li><a href="/#home">Home</a></li>
       <li><a href="/#work">Work</a></li>
@@ -770,6 +822,13 @@
     <span class="footer-logo">Nush<span class="coral">.</span></span>
     <span class="footer-copy">© 2026 Anusha Jaiswal. All rights reserved.</span>
   </footer>
+
+  <script>
+  function toggleMenu(btn) {
+    btn.classList.toggle('open');
+    document.querySelector('.nav-links').classList.toggle('open');
+  }
+  </script>
 
 </body>
 </html>

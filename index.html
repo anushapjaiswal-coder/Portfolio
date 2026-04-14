@@ -629,6 +629,32 @@
     .footer-logo .coral { color: var(--accent); }
     .footer-copy { font-size: 0.78rem; color: var(--text-muted); }
 
+    /* ── GLOBAL MEDIA ───────────────────────────── */
+    img, video { max-width: 100%; height: auto; }
+
+    /* ── HAMBURGER ───────────────────────────────── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+      flex-shrink: 0;
+    }
+    .hamburger span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: #fff;
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
     /* ── SCROLL REVEAL ───────────────────────────── */
     .reveal {
       opacity: 0;
@@ -669,23 +695,62 @@
       .marquee-item { font-size: 0.72rem; }
     }
 
-    /* ── RESPONSIVE 600px ────────────────────────── */
-    @media (max-width: 600px) {
-      .navbar { top: 12px; padding: 10px 16px; gap: 16px; }
-      .nav-links { gap: 14px; }
-      .nav-links a { font-size: 0.78rem; }
-      .nav-logo { font-size: 1rem; }
-      section { padding: 72px 5vw; }
-      .hero-heading { font-size: clamp(2.2rem, 10vw, 3.2rem); letter-spacing: -1px; }
-      .hero-ctas { flex-direction: column; }
+    /* ── RESPONSIVE 768px (mobile) ──────────────── */
+    @media (max-width: 768px) {
+      .navbar {
+        top: 12px;
+        left: 16px;
+        right: 16px;
+        transform: none;
+        width: auto;
+        border-radius: 16px;
+        padding: 12px 16px;
+        flex-wrap: wrap;
+        gap: 0;
+        justify-content: space-between;
+        white-space: normal;
+      }
+      .hamburger { display: flex; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        padding-top: 12px;
+        border-top: 1px solid rgba(255,255,255,0.06);
+        margin-top: 12px;
+        gap: 0;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links li { width: 100%; }
+      .nav-links a {
+        display: block;
+        padding: 10px 4px;
+        font-size: 0.9rem;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+      }
+      .nav-links li:last-child a { border-bottom: none; }
+      section { padding: 72px 16px; }
+      .hero { padding: 100px 16px 72px; }
+      .hero-heading { font-size: clamp(2rem, 10vw, 3rem); letter-spacing: -1px; }
+      .hero-bottom { flex-direction: column; align-items: flex-start; gap: 24px; }
+      .hero-ctas { flex-direction: column; width: 100%; }
+      .btn-primary, .btn-ghost { width: 100%; justify-content: center; }
+      .hero-visual { width: 100%; }
       .hero-mosaic {
-        grid-template-columns: 105px 90px 105px;
-        grid-template-rows: 165px 175px;
-        width: 315px;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: 160px 160px;
+        width: 100%;
         gap: 8px;
       }
-      .about-stats { gap: 24px; }
-      footer { flex-direction: column; gap: 12px; text-align: center; }
+      .mosaic-a, .mosaic-b, .mosaic-c, .mosaic-d {
+        grid-column: auto;
+        grid-row: auto;
+        margin-top: 0;
+        height: 100%;
+      }
+      #about { padding: 72px 16px; }
+      .about-stats { gap: 20px; flex-wrap: wrap; }
+      footer { flex-direction: column; gap: 12px; text-align: center; padding: 28px 16px; }
     }
   </style>
 </head>
@@ -699,6 +764,9 @@
       <img src="nush-logo.svg" alt="Nush" />
       <span class="nav-logo-text">Nush.</span>
     </a>
+    <button class="hamburger" aria-label="Toggle menu" onclick="toggleMenu(this)">
+      <span></span><span></span><span></span>
+    </button>
     <ul class="nav-links">
       <li><a href="#home">Home</a></li>
       <li><a href="#work">Work</a></li>
@@ -909,6 +977,12 @@
   </footer>
 
   <script>
+  // Hamburger menu
+  function toggleMenu(btn) {
+    btn.classList.toggle('open');
+    document.querySelector('.nav-links').classList.toggle('open');
+  }
+
   // Cursor glow
   const glow = document.querySelector('.cursor-glow');
   document.addEventListener('mousemove', e => {
