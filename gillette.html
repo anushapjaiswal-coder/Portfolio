@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gillette Germany PDP Redesign — Nush.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #1C1C1C;
+      --accent: #E8674A;
+      --gold: #C9A84C;
+      --navy: #0D0F2B;
+      --cream: #F5F0E8;
+      --nav-bg: #232323;
+      --text: #FFFFFF;
+      --text-muted: rgba(255,255,255,0.55);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      background: var(--nav-bg);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 100px;
+      padding: 14px 28px;
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      backdrop-filter: blur(12px);
+      white-space: nowrap;
+    }
+    .nav-logo {
+      font-weight: 800;
+      font-size: 1.25rem;
+      text-decoration: none;
+    }
+    .nav-logo .white { color: #fff; }
+    .nav-logo .coral { color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #fff; }
+    .back-link {
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: #fff; }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--navy);
+      min-height: 100vh;
+      padding: 120px 7vw 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 60px;
+      position: relative;
+    }
+    .hero-brand {
+      font-size: 0.85rem;
+      font-weight: 700;
+      font-style: italic;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .hero-heading {
+      font-size: clamp(3.5rem, 6vw, 6.5rem);
+      font-weight: 800;
+      line-height: 1.0;
+      margin-bottom: 28px;
+    }
+    .hero-heading .gold { color: var(--gold); }
+    .hero-body {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.72);
+      font-weight: 300;
+      line-height: 1.75;
+      max-width: 480px;
+      margin-bottom: 48px;
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      padding-top: 24px;
+    }
+    .meta-item {
+      padding: 0 28px 0 0;
+      border-right: 1px solid rgba(255,255,255,0.12);
+      margin-right: 28px;
+    }
+    .meta-item:last-child { border-right: none; }
+    .meta-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      display: block;
+      margin-bottom: 4px;
+    }
+    .meta-value {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.85);
+    }
+
+    /* Hero right — mockups */
+    .hero-right {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 580px;
+    }
+    .hero-laptop {
+      width: 100%;
+      max-width: 640px;
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-phone {
+      position: absolute;
+      bottom: -20px;
+      right: -10px;
+      width: 220px;
+      z-index: 2;
+    }
+
+    /* ── HEURISTIC SECTION ── */
+    .heuristic-section {
+      background: var(--cream);
+      padding: 100px 7vw;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .heuristic-left {
+      position: sticky;
+      top: 100px;
+    }
+    .section-label-small {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .section-heading-dark {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      color: #111;
+      margin-bottom: 24px;
+      line-height: 1.15;
+    }
+    .legend-row {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: rgba(0,0,0,0.55);
+    }
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .legend-dot.red { background: #E84A4A; }
+    .legend-dot.amber { background: #E8A84A; }
+    .legend-dot.grey { background: #B0B0B0; }
+
+    .heuristic-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .h-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 24px 20px;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+    .h-card-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .h-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .h-dot.red { background: #E84A4A; }
+    .h-dot.amber { background: #E8A84A; }
+    .h-dot.grey { background: #B0B0B0; }
+    .h-num {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: rgba(0,0,0,0.35);
+      letter-spacing: 1px;
+    }
+    .h-cat {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.4);
+      margin-bottom: 8px;
+    }
+    .h-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .h-desc {
+      font-size: 0.75rem;
+      color: rgba(0,0,0,0.55);
+      line-height: 1.6;
+    }
+
+    /* ── DARK SECTIONS ── */
+    .dark-section {
+      background: var(--bg);
+      padding: 100px 7vw;
+    }
+    .dark-section .section-label-small { color: var(--accent); }
+    .dark-section .section-heading { color: #fff; }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .section-heading {
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 24px;
+      line-height: 1.15;
+    }
+    .section-body {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.65);
+      font-weight: 300;
+      line-height: 1.8;
+    }
+    .numbered-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 8px;
+    }
+    .numbered-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.75);
+    }
+    .n-num {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--accent);
+      background: rgba(232,103,74,0.12);
+      border-radius: 6px;
+      padding: 3px 8px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* ── COMPETITIVE TABLE ── */
+    .comp-section {
+      background: var(--bg);
+      padding: 100px 7vw;
+    }
+    .comp-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 48px;
+    }
+    .comp-table th {
+      padding: 16px 20px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .comp-table th.highlight { color: #4A90D9; }
+    .comp-table th .badge {
+      display: block;
+      font-size: 0.55rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      color: rgba(255,255,255,0.35);
+      margin-top: 4px;
+    }
+    .comp-table td {
+      padding: 20px;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.65);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      vertical-align: top;
+      line-height: 1.55;
+    }
+    .comp-table td.highlight-col {
+      background: rgba(74,144,217,0.06);
+      border-left: 2px solid rgba(74,144,217,0.3);
+    }
+    .comp-table tr td:first-child {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      width: 160px;
+    }
+    .dots { font-size: 0.9rem; letter-spacing: 2px; display: block; margin-bottom: 6px; }
+    .tag {
+      display: inline-block;
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+      margin-top: 8px;
+    }
+    .tag.gap { background: rgba(232,168,74,0.15); color: #E8A84A; }
+    .tag.best { background: rgba(74,200,120,0.15); color: #4AC878; }
+    .tag.critical { background: rgba(232,74,74,0.15); color: #E84A4A; }
+
+    /* ── WHAT WAS BUILT / THE REDESIGN SECTION ── */
+    .built-section {
+      background: var(--cream);
+      padding: 100px 7vw;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .built-left {
+      position: sticky;
+      top: 100px;
+    }
+    .built-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .built-heading {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #111;
+      line-height: 1.15;
+    }
+    .built-img {
+      width: 100%;
+      border-radius: 12px;
+      display: block;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+    }
+
+    /* ── FINAL MOCKUP SECTION ── */
+    .final-section {
+      background: var(--navy);
+      padding: 72px 7vw 100px;
+      display: flex;
+      flex-direction: column;
+    }
+    .final-brand {
+      font-size: 1rem;
+      font-weight: 800;
+      font-style: italic;
+      color: #fff;
+      letter-spacing: 1px;
+      margin-bottom: 56px;
+      align-self: flex-start;
+    }
+    .final-img {
+      width: 900px;
+      max-width: 100%;
+      display: block;
+      margin: 0 auto;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 32px 7vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      background: var(--bg);
+    }
+    .footer-logo { font-weight: 800; font-size: 1.1rem; }
+    .footer-logo .coral { color: var(--accent); }
+    .footer-copy { font-size: 0.78rem; color: var(--text-muted); }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; padding-top: 100px; }
+      .two-col { grid-template-columns: 1fr; gap: 40px; }
+      .heuristic-section { grid-template-columns: 1fr; gap: 40px; }
+      .heuristic-left { position: static; }
+      .heuristic-grid { grid-template-columns: repeat(2, 1fr); }
+      .built-section { grid-template-columns: 1fr; gap: 40px; }
+      .built-left { position: static; }
+      .comp-table { font-size: 0.72rem; }
+    }
+    @media (max-width: 600px) {
+      .heuristic-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="index.html#work" class="back-link">← Back to Work</a>
+    <a href="index.html" class="nav-logo">
+      <span class="white">Nush</span><span class="coral">.</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#work">Work</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="cv.html">CV</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <p class="hero-brand">Gillette Germany</p>
+      <h1 class="hero-heading">
+        Razor<br>
+        <span class="gold">PDP</span><br>
+        Redesign
+      </h1>
+      <p class="hero-body">Increasing customer retention on Gillette.de by redesigning the razor product detail page and articles experience for the German market.</p>
+      <div class="hero-meta">
+        <div class="meta-item">
+          <span class="meta-label">Client</span>
+          <span class="meta-value">Gillette Germany</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Focus</span>
+          <span class="meta-value">Retention</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Assets</span>
+          <span class="meta-value">Brand Guidelines &amp; Icons</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Year</span>
+          <span class="meta-value">2023</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <img class="hero-laptop" src="Group 76.png" alt="Gillette PDP desktop mockup" />
+      <img class="hero-phone" src="Mobile-gray 1.png" alt="Gillette PDP mobile mockup" />
+    </div>
+  </section>
+
+  <!-- HEURISTIC EVALUATION -->
+  <section class="heuristic-section">
+    <div class="heuristic-left">
+      <p class="section-label-small">Heuristic Evaluation</p>
+      <h2 class="section-heading-dark">What was broken</h2>
+      <div class="legend-row">
+        <div class="legend-item"><div class="legend-dot red"></div> High</div>
+        <div class="legend-item"><div class="legend-dot amber"></div> Medium</div>
+        <div class="legend-item"><div class="legend-dot grey"></div> Low</div>
+      </div>
+    </div>
+    <div class="heuristic-grid">
+
+      <!-- 01 -->
+      <div class="h-card">
+        <div class="h-card-top"><div class="h-dot red"></div><span class="h-num">01</span></div>
+        <p class="h-cat">Visibility of System Status</p>
+        <p class="h-title">No cart confirmation feedback</p>
+        <p class="h-desc">Adding a product showed no visual response — users couldn't tell if the action worked.</p>
+      </div>
+      <!-- 02 -->
+      <div class="h-card">
+        <div class="h-card-top"><div class="h-dot red"></div><span class="h-num">02</span></div>
+        <p class="h-cat">Match System &amp; Real World</p>
+        <p class="h-title">Technical jargon, no plain-language benefits</p>
+        <p class="h-desc">"FlexBall technology" appeared with no explanation of what it means for the user's shave.</p>
+      </div>
+      <!-- 03 -->
+      <div class="h-card">
+        <div class="h-card-top"><div class="h-dot red"></div><span class="h-num">03</span></div>
+        <p class="h-cat">User Control &amp; Freedom</p>
+        <p class="h-title">No in-page model comparison</p>
+        <p class="h-desc">Comparing Fusion5 vs SkinGuard required leaving the page entirely and relying on memory.</p>
+      </div>
+      <!-- 04 -->
+      <div class="h-card">
+        <div class="h-card-top"><div class="h-dot red"></div><span class="h-num">04</span></div>
+        <p class="h-cat">Consistency &amp; Standards</p>
+        <p class="h-title">CTA position and labels vary per product</p>
+        <p class="h-desc">Add to Cart appeared above imagery on some pages, below spec tables on others.</p>
+      </div>
+
+      <!-- 05 -->
+      <div class="h-card">
+        <div class="h-card-top"><div class="h-dot amber"></div><span class="h-num">05</span></div>
+        <p class="h-cat">Recognition Over Recall</p>
+        <p class="h-title">Blade compatibility invisible on PDP</p>
+        <p class="h-desc">Users had to navigate away and cross-reference to find compatible refill blades.</p>
+      </div>
+      <!-- 06 -->
+      <div class="h-card">
+        <div class="h-card-top"><div class="h-dot amber"></div><span class="h-num">06</span></div>
+        <p class="h-cat">Aesthetic &amp; Minimalist Design</p>
+        <p class="h-title">Promo banners overwhelm product content</p>
+        <p class="h-desc">Discount banners competed directly with the product hero, diluting the premium feel.</p>
+      </div>
+      <!-- 07 -->
+      <div class="h-card">
+        <div class="h-card-top"><div class="h-dot amber"></div><span class="h-num">07</span></div>
+        <p class="h-cat">Flexibility &amp; Efficiency</p>
+        <p class="h-title">No subscription option on PDP</p>
+        <p class="h-desc">The blade refill subscription existed elsewhere but was completely absent from the PDP.</p>
+      </div>
+      <!-- 08 -->
+      <div class="h-card">
+        <div class="h-card-top"><div class="h-dot amber"></div><span class="h-num">08</span></div>
+        <p class="h-cat">Error Recovery</p>
+        <p class="h-title">Out-of-stock handling offers no path forward</p>
+        <p class="h-desc">Unavailable variants were greyed out with no message, no alternative, no notify option.</p>
+      </div>
+
+      <!-- 09 -->
+      <div class="h-card">
+        <div class="h-card-top"><div class="h-dot grey"></div><span class="h-num">09</span></div>
+        <p class="h-cat">Error Prevention</p>
+        <p class="h-title">Incompatible blade + handle combo possible</p>
+        <p class="h-desc">A Mach3 handle and Fusion5 blades could be added to cart together with no warning.</p>
+      </div>
+      <!-- 10 -->
+      <div class="h-card">
+        <div class="h-card-top"><div class="h-dot grey"></div><span class="h-num">10</span></div>
+        <p class="h-cat">Help &amp; Documentation</p>
+        <p class="h-title">No FAQ or support on PDP</p>
+        <p class="h-desc">Help required navigating to the footer — breaking the user's purchase flow entirely.</p>
+      </div>
+      <!-- 11 -->
+      <div class="h-card">
+        <div class="h-card-top"><div class="h-dot grey"></div><span class="h-num">11</span></div>
+        <p class="h-cat">Visibility of System Status</p>
+        <p class="h-title">No breadcrumb navigation</p>
+        <p class="h-desc">Users landing from search had no sense of where they were within the site.</p>
+      </div>
+      <!-- 12 -->
+      <div class="h-card">
+        <div class="h-card-top"><div class="h-dot grey"></div><span class="h-num">12</span></div>
+        <p class="h-cat">Aesthetic &amp; Minimalist Design</p>
+        <p class="h-title">Reviews buried below the fold</p>
+        <p class="h-desc">Social proof only appeared after spec tables — invisible to most users at the CTA.</p>
+      </div>
+
+    </div>
+    </div>
+  </section>
+
+  <!-- THE SECOND MISSED PAGE -->
+  <section class="dark-section">
+    <div class="two-col">
+      <div>
+        <p class="section-label-small" style="color:var(--gold);">Articles Page</p>
+        <h2 class="section-heading">The second missed page</h2>
+        <p class="section-body">The editorial content page had no mechanism to bring users back or guide them toward re-purchase — a key gap in the retention loop.</p>
+      </div>
+      <div>
+        <ul class="numbered-list">
+          <li><span class="n-num">01</span> No path back to product</li>
+          <li><span class="n-num">02</span> Not discoverable from PDP</li>
+          <li><span class="n-num">03</span> Zero retention mechanics</li>
+          <li><span class="n-num">04</span> Disconnected from blade lifecycle</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPETITIVE ANALYSIS -->
+  <section class="comp-section">
+    <p class="section-label-small" style="color:var(--gold);">Competitive Analysis</p>
+    <h2 class="section-heading">Where Gillette stood</h2>
+    <p class="section-body" style="max-width:600px; margin-bottom:0;">We benchmarked Gillette DE against 3 competitors across 8 UX dimensions — revealing clear gaps the redesign needed to close.</p>
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th class="highlight">Gillette DE<span class="badge">SUBJECT</span></th>
+          <th>Harry's<span class="badge">DTC CHALLENGER</span></th>
+          <th>Wilkinson<span class="badge">EU LEGACY</span></th>
+          <th>Braun DE<span class="badge">P&amp;G SIBLING</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Product Layout</td>
+          <td class="highlight-col">
+            <span class="dots">■■□□□</span>
+            Inconsistent CTA placement; no clear visual hierarchy between product variants.
+            <span class="tag critical">Critical Gap</span>
+          </td>
+          <td>
+            <span class="dots">■■■■□</span>
+            Clean single-column layout, prominent CTA with sticky behaviour on scroll.
+            <span class="tag best">Best in Class</span>
+          </td>
+          <td>
+            <span class="dots">■■■□□</span>
+            Functional but cluttered; promo banners compete with product hero imagery.
+            <span class="tag gap">Gap</span>
+          </td>
+          <td>
+            <span class="dots">■■■■□</span>
+            Strong visual hierarchy; consistent CTA position across all product pages.
+            <span class="tag best">Best in Class</span>
+          </td>
+        </tr>
+        <tr>
+          <td>Subscription &amp; Retention</td>
+          <td class="highlight-col">
+            <span class="dots">■□□□□</span>
+            Subscription option exists on site but is entirely absent from the PDP.
+            <span class="tag critical">Critical Gap</span>
+          </td>
+          <td>
+            <span class="dots">■■■■■</span>
+            Subscription is the default selection; prominently surfaced with savings callout.
+            <span class="tag best">Best in Class</span>
+          </td>
+          <td>
+            <span class="dots">■■□□□</span>
+            Available but not prominent — buried in footer or separate subscription page.
+            <span class="tag gap">Gap</span>
+          </td>
+          <td>
+            <span class="dots">■■□□□</span>
+            Subscription available but not integrated into PDP flow.
+            <span class="tag gap">Gap</span>
+          </td>
+        </tr>
+        <tr>
+          <td>Social Proof</td>
+          <td class="highlight-col">
+            <span class="dots">■■□□□</span>
+            Reviews present but below the fold — invisible to most users at point of CTA.
+            <span class="tag critical">Critical Gap</span>
+          </td>
+          <td>
+            <span class="dots">■■■■□</span>
+            Star rating shown near product title; review count prominent above the fold.
+            <span class="tag best">Best in Class</span>
+          </td>
+          <td>
+            <span class="dots">■■■□□</span>
+            Rating shown near title but review depth is limited.
+            <span class="tag gap">Gap</span>
+          </td>
+          <td>
+            <span class="dots">■■■□□</span>
+            Ratings visible near CTA but review count is minimal.
+            <span class="tag gap">Gap</span>
+          </td>
+        </tr>
+        <tr>
+          <td>Navigation &amp; Findability</td>
+          <td class="highlight-col">
+            <span class="dots">■■□□□</span>
+            No breadcrumbs; users landing from search have no contextual wayfinding.
+            <span class="tag critical">Critical Gap</span>
+          </td>
+          <td>
+            <span class="dots">■■■□□</span>
+            Minimal navigation but clean — relies on product as standalone destination.
+            <span class="tag gap">Gap</span>
+          </td>
+          <td>
+            <span class="dots">■■■■□</span>
+            Clear breadcrumbs and category navigation across all PDPs.
+            <span class="tag best">Best in Class</span>
+          </td>
+          <td>
+            <span class="dots">■■■■□</span>
+            Strong breadcrumb system; product family navigation clearly labelled.
+            <span class="tag best">Best in Class</span>
+          </td>
+        </tr>
+        <tr>
+          <td>Help &amp; Support</td>
+          <td class="highlight-col">
+            <span class="dots">■□□□□</span>
+            No FAQ on PDP. Help requires navigating to footer — breaks purchase flow.
+            <span class="tag critical">Critical Gap</span>
+          </td>
+          <td>
+            <span class="dots">■■■□□</span>
+            FAQ section on PDP addresses common blade/skin-type questions inline.
+            <span class="tag gap">Gap</span>
+          </td>
+          <td>
+            <span class="dots">■■□□□</span>
+            FAQ available but linked, not embedded — still requires context switching.
+            <span class="tag gap">Gap</span>
+          </td>
+          <td>
+            <span class="dots">■■■□□</span>
+            In-page FAQ for product compatibility; chatbot accessible from PDP.
+            <span class="tag gap">Gap</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- WHAT WAS BUILT / THE REDESIGN -->
+  <section class="built-section">
+    <div class="built-left">
+      <p class="built-label">What Was Built</p>
+      <h2 class="built-heading">The Redesign</h2>
+    </div>
+    <div>
+      <img src="Desktop - 16.png" alt="Redesigned Gillette PDP" class="built-img" />
+    </div>
+  </section>
+
+  <!-- FINAL PROTOTYPE -->
+  <section class="gillette-final">
+    <!-- ambient glow -->
+    <div class="final-glow"></div>
+
+    <p class="final-label">Final Prototype</p>
+    <h2 class="final-heading">The Experience</h2>
+
+    <div class="mockup-pair">
+
+      <!-- LEFT — PDP -->
+      <div class="mockup-col">
+        <div class="browser-mockup">
+          <div class="browser-chrome">
+            <div class="browser-dots">
+              <span class="browser-dot dot-red"></span>
+              <span class="browser-dot dot-yellow"></span>
+              <span class="browser-dot dot-green"></span>
+            </div>
+            <div class="browser-url">gillette.de/products/fusion5</div>
+            <div class="browser-dots-spacer"></div>
+          </div>
+          <div class="browser-viewport">
+            <img src="Description.png" class="browser-scroll-img" alt="Gillette PDP redesign walkthrough" />
+            <div class="browser-fade"></div>
+          </div>
+        </div>
+        <p class="mockup-label">Product Detail Page</p>
+      </div>
+
+      <!-- RIGHT — Articles -->
+      <div class="mockup-col">
+        <div class="browser-mockup">
+          <div class="browser-chrome">
+            <div class="browser-dots">
+              <span class="browser-dot dot-red"></span>
+              <span class="browser-dot dot-yellow"></span>
+              <span class="browser-dot dot-green"></span>
+            </div>
+            <div class="browser-url">gillette.de/articles</div>
+            <div class="browser-dots-spacer"></div>
+          </div>
+          <div class="browser-viewport">
+            <video
+              class="browser-video"
+              src="articles-prototype.mp4"
+              autoplay
+              muted
+              loop
+              playsinline
+            ></video>
+            <div class="browser-fade"></div>
+          </div>
+        </div>
+        <p class="mockup-label">Articles Page</p>
+      </div>
+
+    </div>
+  </section>
+
+  <style>
+  .gillette-final {
+    background: #0e1540;
+    padding: 120px 7vw 120px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ambient radial glow — wider to cover both mockups */
+  .final-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1400px;
+    height: 800px;
+    background: radial-gradient(ellipse at center,
+      rgba(100, 120, 255, 0.08) 0%,
+      rgba(80, 100, 220, 0.04) 40%,
+      transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .final-label {
+    position: relative;
+    z-index: 2;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #7B8FDB;
+    margin-bottom: 16px;
+  }
+
+  .final-heading {
+    position: relative;
+    z-index: 2;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 64px;
+    line-height: 1.1;
+    letter-spacing: -1px;
+  }
+
+  /* side-by-side container */
+  .mockup-pair {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    gap: 36px;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .mockup-col {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  /* shared browser frame */
+  .browser-mockup {
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(255, 255, 255, 0.04);
+    overflow: hidden;
+    background: #fff;
+  }
+
+  /* chrome bar */
+  .browser-chrome {
+    background: #e8e8e8;
+    padding: 11px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .browser-dots {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .browser-dots-spacer {
+    width: 42px;
+    flex-shrink: 0;
+  }
+
+  .browser-dot {
+    display: block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+  .dot-red    { background: #FF5F57; }
+  .dot-yellow { background: #FFBD2E; }
+  .dot-green  { background: #28C840; }
+
+  .browser-url {
+    flex: 1;
+    background: #fff;
+    border-radius: 6px;
+    padding: 5px 14px;
+    font-size: 0.72rem;
+    color: rgba(0, 0, 0, 0.45);
+    font-family: 'Poppins', sans-serif;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* viewport — same height for both */
+  .browser-viewport {
+    height: 540px;
+    overflow: hidden;
+    position: relative;
+    background: #fff;
+  }
+
+  /* PDP scrolling screenshot */
+  .browser-scroll-img {
+    width: 100%;
+    display: block;
+    animation: pdpScroll 28s cubic-bezier(0.37, 0, 0.63, 1) infinite;
+    transform-origin: top center;
+  }
+
+  @keyframes pdpScroll {
+    0%   { transform: translateY(0); }
+    8%   { transform: translateY(0); }
+    88%  { transform: translateY(-62%); }
+    96%  { transform: translateY(-62%); }
+    100% { transform: translateY(0); }
+  }
+
+  /* Articles video */
+  .browser-video {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  /* fade at bottom of both viewports */
+  .browser-fade {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 140px;
+    background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.95) 100%);
+    pointer-events: none;
+  }
+
+  /* per-mockup labels */
+  .mockup-label {
+    margin-top: 16px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+    text-align: center;
+  }
+
+  /* responsive — stack vertically on small screens */
+  @media (max-width: 900px) {
+    .mockup-pair {
+      flex-direction: column;
+      gap: 48px;
+    }
+    .mockup-col {
+      width: 100%;
+    }
+  }
+  </style>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo">Nush<span class="coral">.</span></span>
+    <span class="footer-copy">© 2026 Anusha Jaiswal. All rights reserved.</span>
+  </footer>
+
+</body>
+</html>
