@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nutreasy — Healthy Eating, Simplified · Nush.</title>
+  <link rel="icon" type="image/svg+xml" href="nush-favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Syne:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #1C1C1C;
+      --accent: #E8674A;
+      --green: #4CAF78;
+      --dark-green: #0D1F14;
+      --cream: #F2F5F0;
+      --nav-bg: #232323;
+      --text: #FFFFFF;
+      --text-muted: rgba(255,255,255,0.55);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      background: var(--nav-bg);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 100px;
+      padding: 14px 28px;
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      backdrop-filter: blur(12px);
+      white-space: nowrap;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo img { height: 40px; width: auto; }
+    .nav-logo-text {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: #fff;
+    }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #fff; }
+    .back-link {
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: #fff; }
+
+    /* ── GLOBAL MEDIA ── */
+    img, video { max-width: 100%; height: auto; }
+
+    /* ── HAMBURGER ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+      flex-shrink: 0;
+    }
+    .hamburger span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: #fff;
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--dark-green);
+      min-height: 100vh;
+      padding: 120px 7vw 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -200px;
+      right: -200px;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(76,175,120,0.08) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-brand {
+      font-size: 0.85rem;
+      font-weight: 700;
+      font-style: italic;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .hero-heading {
+      font-size: clamp(3rem, 5.5vw, 6rem);
+      font-weight: 800;
+      line-height: 1.0;
+      margin-bottom: 28px;
+      letter-spacing: -2px;
+    }
+    .hero-heading .green { color: var(--green); }
+    .hero-body {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.72);
+      font-weight: 300;
+      line-height: 1.75;
+      max-width: 480px;
+      margin-bottom: 48px;
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      padding-top: 24px;
+    }
+    .meta-item {
+      padding: 0 28px 0 0;
+      border-right: 1px solid rgba(255,255,255,0.12);
+      margin-right: 28px;
+      margin-bottom: 12px;
+    }
+    .meta-item:last-child { border-right: none; margin-right: 0; }
+    .meta-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      display: block;
+      margin-bottom: 4px;
+    }
+    .meta-value {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.85);
+    }
+    .hero-right {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero-right img {
+      width: 100%;
+      max-width: 540px;
+      border-radius: 20px;
+      display: block;
+    }
+
+    /* ── SECTION SHARED ── */
+    .section-label-small {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .section-heading {
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 24px;
+      line-height: 1.15;
+    }
+    .section-heading-dark {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      color: #111;
+      margin-bottom: 24px;
+      line-height: 1.15;
+    }
+    .section-body {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.65);
+      font-weight: 300;
+      line-height: 1.8;
+    }
+    .section-body-dark {
+      font-size: 0.95rem;
+      color: rgba(0,0,0,0.6);
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    /* ── DARK SECTION ── */
+    .dark-section {
+      background: var(--bg);
+      padding: 100px 7vw;
+    }
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .numbered-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 8px;
+    }
+    .numbered-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.75);
+    }
+    .n-num {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--green);
+      background: rgba(76,175,120,0.12);
+      border-radius: 6px;
+      padding: 3px 8px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* ── LIGHT SECTION ── */
+    .light-section {
+      background: var(--cream);
+      padding: 100px 7vw;
+    }
+
+    /* ── IMAGE GRID ── */
+    .img-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 48px;
+    }
+    .img-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 48px;
+    }
+    .img-grid-full {
+      margin-top: 48px;
+    }
+    .cs-img {
+      width: 100%;
+      border-radius: 12px;
+      display: block;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+    }
+    .cs-img-dark {
+      width: 100%;
+      border-radius: 12px;
+      display: block;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    }
+
+    /* ── FEATURE CARDS ── */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 48px;
+    }
+    .feature-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 28px 24px;
+    }
+    .feature-num {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--green);
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      display: block;
+    }
+    .feature-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .feature-desc {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.65;
+    }
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      background: var(--dark-green);
+      padding: 100px 7vw;
+      text-align: center;
+    }
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 40px;
+      border-radius: 100px;
+      background: var(--green);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-top: 32px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .cta-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(76,175,120,0.35);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 32px 7vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      background: var(--bg);
+    }
+    .footer-logo { font-weight: 800; font-size: 1.1rem; }
+    .footer-logo .coral { color: var(--accent); }
+    .footer-copy { font-size: 0.78rem; color: var(--text-muted); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; padding-top: 100px; min-height: auto; }
+      .two-col { grid-template-columns: 1fr; gap: 40px; }
+      .img-grid-3 { grid-template-columns: 1fr 1fr; }
+      .feature-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .navbar {
+        top: 12px;
+        left: 16px;
+        right: 16px;
+        transform: none;
+        width: auto;
+        border-radius: 16px;
+        padding: 12px 16px;
+        flex-wrap: wrap;
+        gap: 0;
+        justify-content: space-between;
+        white-space: normal;
+      }
+      .hamburger { display: flex; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        padding-top: 12px;
+        border-top: 1px solid rgba(255,255,255,0.06);
+        margin-top: 12px;
+        gap: 0;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links li { width: 100%; }
+      .nav-links a {
+        display: block;
+        padding: 10px 4px;
+        font-size: 0.9rem;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+      }
+      .nav-links li:last-child a { border-bottom: none; }
+      .dark-section, .light-section, .cta-section { padding: 72px 16px; }
+      .hero { padding: 100px 16px 72px; }
+      .img-grid-2 { grid-template-columns: 1fr; }
+      .img-grid-3 { grid-template-columns: 1fr; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .section-heading { font-size: clamp(1.6rem, 6vw, 2.4rem); }
+      footer { flex-direction: column; gap: 12px; text-align: center; padding: 28px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="/#work" class="back-link">← Back to Work</a>
+    <a href="/" class="nav-logo">
+      <img src="nush-logo.svg" alt="Nush" />
+      <span class="nav-logo-text">Nush.</span>
+    </a>
+    <button class="hamburger" aria-label="Toggle menu" onclick="toggleMenu(this)">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/#work">Work</a></li>
+      <li><a href="/#about">About</a></li>
+      <li><a href="cv.html">CV</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <p class="hero-brand">Mobile App · UI/UX</p>
+      <h1 class="hero-heading">
+        <span class="green">Nutr</span>easy<br>
+      </h1>
+      <p class="hero-body">Revolutionize independent living with our food app! Track calories, order cooking packages, and savour healthy dishes from top restaurants. Elevate your health effortlessly!</p>
+      <div class="hero-meta">
+        <div class="meta-item">
+          <span class="meta-label">Type</span>
+          <span class="meta-value">Mobile App</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Focus</span>
+          <span class="meta-value">UI/UX Design</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Tools</span>
+          <span class="meta-value">Figma, Photoshop, Illustrator</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <img src="nutreasy-01.jpg" alt="Nutreasy app hero" />
+    </div>
+  </section>
+
+  <!-- OVERVIEW -->
+  <section class="dark-section">
+    <div class="two-col">
+      <div>
+        <p class="section-label-small" style="color: var(--green);">Overview</p>
+        <h2 class="section-heading">Healthy Eating,<br>Simplified</h2>
+        <p class="section-body">Nutreasy was designed to make healthy eating approachable for people living independently — combining calorie tracking, meal kit ordering, and restaurant discovery in one seamless experience.</p>
+      </div>
+      <div>
+        <ul class="numbered-list">
+          <li><span class="n-num">01</span> Calorie and nutrition tracking with a minimal, non-judgmental interface</li>
+          <li><span class="n-num">02</span> Curated cooking packages delivered to your door, step-by-step</li>
+          <li><span class="n-num">03</span> Healthy restaurant recommendations filtered by dietary preference</li>
+          <li><span class="n-num">04</span> Progress visualisation to build sustainable healthy habits over time</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- BRAND & VISUAL IDENTITY -->
+  <section class="light-section">
+    <p class="section-label-small">Brand &amp; Visual Identity</p>
+    <h2 class="section-heading-dark">Design Language</h2>
+    <p class="section-body-dark" style="max-width: 600px;">A fresh, approachable visual language rooted in natural tones — communicating health without the sterile coldness of traditional diet apps.</p>
+    <div class="img-grid-2">
+      <img src="nutreasy-02.jpg" alt="Nutreasy brand identity" class="cs-img" />
+      <img src="nutreasy-03.jpg" alt="Nutreasy colour palette and typography" class="cs-img" />
+    </div>
+  </section>
+
+  <!-- KEY FEATURES -->
+  <section class="dark-section">
+    <p class="section-label-small" style="color: var(--green);">Features</p>
+    <h2 class="section-heading">What the app does</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <span class="feature-num">01</span>
+        <p class="feature-title">Calorie Tracking</p>
+        <p class="feature-desc">Log meals quickly with a smart search and barcode scanner. Visual daily summaries keep motivation high without obsessing over numbers.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-num">02</span>
+        <p class="feature-title">Cooking Packages</p>
+        <p class="feature-desc">Order pre-portioned ingredient kits with guided recipes. Designed for people who want to cook but don't know where to start.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-num">03</span>
+        <p class="feature-title">Restaurant Discovery</p>
+        <p class="feature-desc">Find nearby healthy restaurants filtered by cuisine, dietary needs, and calorie range. Order directly within the app.</p>
+      </div>
+    </div>
+    <div class="img-grid-full" style="margin-top: 48px;">
+      <img src="nutreasy-04.jpg" alt="Nutreasy feature screens" class="cs-img-dark" />
+    </div>
+  </section>
+
+  <!-- USER RESEARCH & FLOWS -->
+  <section class="light-section">
+    <p class="section-label-small">Research &amp; Process</p>
+    <h2 class="section-heading-dark">Understanding the user</h2>
+    <p class="section-body-dark" style="max-width: 600px;">Research revealed that people living alone struggle most with motivation and decision fatigue around food — not lack of knowledge.</p>
+    <div class="img-grid-2">
+      <img src="nutreasy-05.jpg" alt="User research findings" class="cs-img" />
+      <img src="nutreasy-06.jpg" alt="User flow diagrams" class="cs-img" />
+    </div>
+    <div class="img-grid-2" style="margin-top: 20px;">
+      <img src="nutreasy-07.jpg" alt="Wireframes" class="cs-img" />
+      <img src="nutreasy-08.jpg" alt="Information architecture" class="cs-img" />
+    </div>
+  </section>
+
+  <!-- SCREENS SHOWCASE -->
+  <section class="dark-section">
+    <p class="section-label-small" style="color: var(--green);">UI Design</p>
+    <h2 class="section-heading">Final Screens</h2>
+    <div class="img-grid-full">
+      <img src="nutreasy-09.jpg" alt="Nutreasy onboarding screens" class="cs-img-dark" />
+    </div>
+    <div class="img-grid-3" style="margin-top: 20px;">
+      <img src="nutreasy-10.jpg" alt="Home screen" class="cs-img-dark" />
+      <img src="nutreasy-11.jpg" alt="Tracking screen" class="cs-img-dark" />
+      <img src="nutreasy-12.jpg" alt="Discover screen" class="cs-img-dark" />
+    </div>
+    <div class="img-grid-2" style="margin-top: 20px;">
+      <img src="nutreasy-13.jpg" alt="Restaurant ordering" class="cs-img-dark" />
+      <img src="nutreasy-14.jpg" alt="Cooking package screen" class="cs-img-dark" />
+    </div>
+    <div class="img-grid-full" style="margin-top: 20px;">
+      <img src="nutreasy-15.jpg" alt="Nutreasy full prototype overview" class="cs-img-dark" />
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <p class="section-label-small" style="color: var(--green);">View Full Project</p>
+    <h2 class="section-heading">See it on Behance</h2>
+    <p style="color: rgba(255,255,255,0.6); max-width: 480px; margin: 0 auto; font-size: 0.95rem; line-height: 1.7;">View the full case study including all screens, components, and prototype flows on Behance.</p>
+    <a href="https://www.behance.net/gallery/247619333/Nutreasy" target="_blank" rel="noopener" class="cta-btn">
+      View on Behance
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H5M12 4V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo">Nush<span class="coral">.</span></span>
+    <span class="footer-copy">© 2026 Anusha Jaiswal. All rights reserved.</span>
+  </footer>
+
+  <script>
+  function toggleMenu(btn) {
+    btn.classList.toggle('open');
+    document.querySelector('.nav-links').classList.toggle('open');
+  }
+  </script>
+
+</body>
+</html>
