@@ -107,6 +107,7 @@
       list-style: none;
     }
     .nav-links a {
+      position: relative;
       color: rgba(255,255,255,0.6);
       text-decoration: none;
       font-size: 0.875rem;
@@ -115,6 +116,21 @@
       transition: color 0.2s cubic-bezier(0.22, 1, 0.36, 1);
     }
     .nav-links a:hover { color: var(--text); }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 100%;
+      height: 2px;
+      background: var(--accent);
+      border-radius: 2px;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .nav-links a.active { color: var(--text); }
+    .nav-links a.active::after { transform: scaleX(1); }
 
     /* ── HERO ────────────────────────────────────── */
     .hero {
@@ -729,6 +745,8 @@
         border-bottom: 1px solid rgba(255,255,255,0.05);
       }
       .nav-links li:last-child a { border-bottom: none; }
+      .nav-links a.active { color: var(--accent); }
+      .nav-links a.active::after { display: none; }
       section { padding: 72px 16px; }
       .hero { padding: 100px 16px 72px; }
       .hero-heading { font-size: clamp(2rem, 10vw, 3rem); letter-spacing: -1px; }
@@ -1032,6 +1050,29 @@
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.15 });
   reveals.forEach(el => observer.observe(el));
+
+  // Active nav scrollspy
+  const navAnchors = document.querySelectorAll('.nav-links a');
+
+  if (window.location.pathname.endsWith('cv.html')) {
+    // On the CV page, mark the CV link active immediately
+    navAnchors.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('href') === 'cv.html');
+    });
+  } else {
+    const navSections = document.querySelectorAll('#home, #work, #about, #contact');
+    // Trigger zone: 40%–50% band of viewport so only one section fires at a time
+    const scrollspy = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const target = '#' + entry.target.id;
+        navAnchors.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === target);
+        });
+      });
+    }, { rootMargin: '-40% 0px -50% 0px' });
+    navSections.forEach(s => scrollspy.observe(s));
+  }
   </script>
 
 </body>
