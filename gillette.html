@@ -536,6 +536,93 @@
       .hero-right { height: auto; min-height: 340px; }
       .section-heading { font-size: clamp(1.6rem, 6vw, 2.4rem); }
     }
+
+    /* ── NEXT PROJECT ── */
+    .next-project {
+      background: #111;
+      padding: 80px 7vw;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .next-project-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      background: #1C1C1C;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 20px;
+      padding: 52px 56px;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                  box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                  border-color 0.3s;
+    }
+    .next-project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+      border-color: rgba(232,103,74,0.2);
+    }
+    .next-project-eyebrow {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .next-project-title {
+      font-size: clamp(1.8rem, 3.5vw, 3rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.1;
+      letter-spacing: -0.5px;
+      margin-bottom: 20px;
+    }
+    .next-project-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(232,103,74,0.1);
+      border-radius: 100px;
+      padding: 5px 14px;
+    }
+    .next-project-arrow {
+      flex-shrink: 0;
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: rgba(232,103,74,0.1);
+      border: 1px solid rgba(232,103,74,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      transition: background 0.3s, color 0.3s,
+                  transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .next-project-card:hover .next-project-arrow {
+      background: var(--accent);
+      color: #fff;
+      transform: translateX(4px);
+    }
+    @media (max-width: 768px) {
+      .next-project { padding: 60px 16px; }
+      .next-project-card {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 36px 28px;
+        gap: 28px;
+      }
+      .next-project-arrow {
+        width: 56px;
+        height: 56px;
+        align-self: flex-end;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1105,6 +1192,20 @@
     }
   }
   </style>
+
+  <!-- NEXT PROJECT -->
+  <section class="next-project">
+    <a href="powerweave.html" class="next-project-card">
+      <div>
+        <p class="next-project-eyebrow">Next Project</p>
+        <h2 class="next-project-title">Powerweave HR Portal</h2>
+        <span class="next-project-tag">Product · AI</span>
+      </div>
+      <div class="next-project-arrow">
+        <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </a>
+  </section>
 
   <!-- FOOTER -->
   <footer>
