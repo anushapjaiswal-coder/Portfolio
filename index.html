@@ -1061,17 +1061,22 @@
     });
   } else {
     const navSections = document.querySelectorAll('#home, #work, #about, #contact');
-    // Trigger zone: 40%–50% band of viewport so only one section fires at a time
-    const scrollspy = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        const target = '#' + entry.target.id;
-        navAnchors.forEach(link => {
-          link.classList.toggle('active', link.getAttribute('href') === target);
-        });
+
+    function updateActiveNav() {
+      let current = '';
+      // Walk sections in DOM order; last one whose top is above 40% of viewport wins
+      navSections.forEach(section => {
+        if (section.getBoundingClientRect().top <= window.innerHeight * 0.4) {
+          current = section.id;
+        }
       });
-    }, { rootMargin: '-40% 0px -50% 0px' });
-    navSections.forEach(s => scrollspy.observe(s));
+      navAnchors.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+      });
+    }
+
+    window.addEventListener('scroll', updateActiveNav, { passive: true });
+    updateActiveNav(); // set correct state on load
   }
   </script>
 
